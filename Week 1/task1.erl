@@ -128,27 +128,3 @@ groupby(F, [H|T], M, Index) when is_map(M) ->
 
 groupby(_,[], M, _) ->
     M.
-
-
-
-% groupby(_, [], Neg, Pos, Zero, _) ->
-%     #{negative => lists:reverse(Neg), positive => lists:reverse(Pos), zero => lists:reverse(Zero)};
-
-% groupby(F,[H|T], Neg, Pos, Zer, Index) ->
-%     case F(H) of
-%         positive -> 
-%             Positive = [Index | Pos],
-%             Negative = Neg,
-%             Zero = Zer;
-
-%         negative -> 
-%             Negative = [Index | Neg],
-%             Positive = Pos,
-%             Zero = Zer;
-
-%         zero ->
-%             Zero = [Index | Zer],
-%             Positive = Pos,
-%             Negative = Neg
-%     end,
-%     groupby(F, T, Negative, Positive, Zero, Index+1).
