@@ -1,0 +1,45 @@
+Problem 1 (3 points)
+
+Problem 1.1 (1 points)
+Write an Erlang module double containing the function start/0. 
+The function start/0 creates a process and registers it under the name double. 
+The double-process accepts messages on the form Pid, Ref, N and re-turns a message with N doubled. If the process receives a non-number it should crash. 
+
+Problem 1.2 (2 points)
+Write an Erlang module monitor containing the function start/0.
+The start/0function should start the double process and monitor it. If the double process crashes, the monitor process should restart it and continue to monitor its execution. 
+Finally, implement double:double/1, which takes as input an Erlang term and tries to double it using the double process, 
+retrying if the double process is (temporarily) down due to the monitor process restarting it.
+
+Problem 2 (7 points)
+Write an Erlang module named bank bank(in a file bank.erl).  The module should have the following functions:
+
+start() Start a new bank-server with all ac-counts having zero balance, returns a pid to the server.
+
+balance(Pid, Who) Return the balance of Who from the server Pid. Return ok or noaccount.
+
+deposit(Pid, Who, X) Deposit X amount of money to the account Who at the server Pid. If no account exists a new account for Who isopened. Returns {ok, NewAmount}. 
+
+withdraw(Pid, Who, X) Withdraw X amount of money from the account Who at the server Pid. Returns {ok, AmountLeft} or insufficientfunds.
+
+lend(Pid, From, To, X) Lend X amounts of money from From to To. Return ok, insufficientfunds or {noaccount, Who}, 
+where Who is the account that does not exist or the atom both if neither account exists.
+
+Your solution should be implemented using Erlang processes and the implementation should be robust using makeref() and monitor/2. 
+If Pid has stopped (crashed, or does not exist) the functions should return nobank (e.g.,nobank = bank:balance(pid(1,2,3), bob)).
+
+Problem 3 (5 points)
+Implement an Erlang module named pmap that provide parallel implementations of the higher-order function map (i.e., parallel implementations of the lists:map(Fun, L)function).
+
+Problem 3.1 (1 point) 
+Implement the function pmap:unordered(Fun, L)which takes as in-put a function Fun and a list L. 
+The function then for each element I in L spawns one worker process and evaluates Fun on the element. 
+The worker respond to the caller which gather the results and return it. 
+To clarify, the result of pmap:unordered(Fun, L)is the same as that of lists:map(Fun, L)but without guaranteed order.
+
+Problem 3.2 (2 points) 
+Implement the function pmap:unordered(Fun, L, MaxWorkers)which is functionally equivalent to pmap:unordered/2 but only spawns MaxWorkers worker-processes. 
+If MaxWorkers is larger than length(L), MaxWorkers is set to length(L).
+
+Problem 3.3 (2 points) 
+Implement the function pmap:ordered(Fun, L, MaxWorkers)which is functionally equivalent topmap:unordered/3 but the order of the re-turned list is the same as L.
