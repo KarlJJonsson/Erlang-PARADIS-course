@@ -1,0 +1,27 @@
+Problem 1 (4 points)
+Write a function eval/1 which takes as input a tuple and evaluates themathematical expression it denotes.  
+For instance, the call eval({add, 1,1}) would return {ok, 2}, and the call eval({mul, {add, 2, 2}, 4}) would return {ok, 16}.  
+More generally, the function accepts as input an expression tuple E of three(3) elements {Op, E1, E2},  
+where Op is add, mul,’div’ or sub and E1 and E2 are either numbers or expression tuples (see example), and return the answer as the tuple {ok, Value}, 
+or the atom "error" if the evaluation fails for any reason. Implement the function eval/1 in the module task1 and export it.
+
+Problem 2 (5 points)
+Write a function eval/2 which is functionally equivalent to eval/1, but accepts as its second argument a map which maps atoms to numbers. 
+For instance, the call eval({add, a, b}, #{a => 1, b => 2})return 3 and the call eval({mul, {add, a, 3}, b}, #{a => 1, b => 2}) return {ok, 8}. 
+More generally, eval(E, L) accepts as input an expression tuple E of three elements{Op, E1, E2} where Op is defined in Task 1 and E1 and E2 is either a number, 
+atom or an expression tuple, and an Erlang map L that acts as lookup table for atoms. 
+The function returns either {ok, Value} or {error, Reason}, where Reason is either variable_not_found if an atom does not exist in the lookup table or unknown_error. 
+Implement the function eval/2 in the module task1 and export it.
+
+Problem 3 (11 points)
+Implement the higher-order functions in Table using tail recursion but without using list-comprehensions or the lists-module. 
+Ensure that the functions preserve the order of elements.
+
+Function Definition map(F, L) Return a new list which is the result of applying the function F to every element in L. 
+
+filter(P, L)Return a new list which is the result of filtering out the elements in L for which the function P returns true. 
+
+split(P, L) Return a tuple with two lists, {True, False} where True is a list containing the elements of L for which P returns true and False 
+is a list containing the elements of L for which P returns false. Awarded a maximum of 3 points. 
+groupby(F, L) Return a map with#{K1 => I1, ..., Kp => Ip} where Ii is a lists of indices to the values in L where F returns Ki (see example). 
+
