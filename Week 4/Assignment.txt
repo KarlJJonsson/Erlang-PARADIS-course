@@ -1,0 +1,18 @@
+Problem 1 (6 points)
+Re-write the barrier module we saw in Erlang Lecture 6 to not expect a fixed number of process to wait for. 
+Instead, the barrier should wait until a specified set of processes have reached the barrier. 
+All other processes are allowed through the barrier without having to wait. 
+The barrier should not wait for other processes. As a result, do a() and do b()are guaranteed to both have completed before domore(a) and domore(b), 
+where as domore(c) will run as soon as doc() has completed. More specifically, barrier should export start/1 and wait/2, where start(Refs) should accept 
+as argument a list, Refs, of references that should wait at the barrier. 
+Next, wait(Barrier, Ref)should accept as the first argument the Pid returned by barrier:start/1 and as the second argument a reference. 
+If Ref is in Refs, wait/2 should block until all references in Refs has arrived to wait/2. If Ref is not in Refs, the process is let through the barrier.
+
+Problem 2 (7 points)
+Re-write the resource-allocator we saw in Erlang Lecture 6 to support named resources instead of an arbitrary number of resources. 
+More specifically, the start/1-function should accept a map of named resources Pid = allocator:start(#{a=>10, b=>20, c=>30}). 
+Requesting resources is done through calling request/2 with a list of resources to be requested e.g., R = allocator:request(Pid, [a, c]). 
+The call to request/2 should block until the resources are available and return a map with the resources, i.e., if any of the resources is 
+unavailable the function waits until they have been released. 
+Resources are released using allocator:release(Pid, R), where R is a map of resources to be released. 
+The module shall export start/1,request/2 and release/2 as specified.
