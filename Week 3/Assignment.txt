@@ -1,0 +1,13 @@
+Problem 1 (5 points)
+Implement the monitor-module from Assignment 2 Problem 1 using the supervisor behavior. 
+The functionality should be exactly the same, i.e., the monitor module starts the double process and monitors it, restarting it if it crashes. 
+
+Problem 2 (5 points)
+Implement the bank-module from Assignments 2 Problem 1 using the genserver behavior. 
+The inferface should exactly correspond to that of Assignment 2. Note that you can reuse much of your application logic.
+
+Problem 3 (5 points)
+Implement an Erlang module ring, with a function start(N, M) which should create a ring of N processes, then send an integer M times round the ring. 
+The message should start as the integer0and each process in the ring should increment the integer by 1. 
+After the message has been round the ring M times its final value should be N*M.ring:start(N, M)should return the value 
+of the last message (which should be N*M) and make sure that all the processes in the ring have terminated.
